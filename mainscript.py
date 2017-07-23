@@ -9,8 +9,8 @@ def getdata(url):
         sitebs=bs4.BeautifulSoup(site.text)
         listing=sitebs.findAll('tr')
         datastr=[]
-        for i in range(len(listing)):
-            datastr.append(listing[i].text)
+        for item in listing:
+            datastr.append(item.text)
         datastr[0]=datastr[0].replace('\n', '')
         datastr[0]=datastr[0].replace('\xa0', '')
         print(datastr[0])
@@ -21,12 +21,12 @@ def getdata(url):
         datastr[2]=datastr[2].lstrip(',')
         file.write(datastr[2]+'\n')
         datastr=datastr[3:(len(datastr)-1)]
-        for i in range(len(datastr)):
-            datastr[i]=datastr[i].replace('\n', ',')
-            datastr[i]=datastr[i].rstrip(',')
-            datastr[i]=datastr[i].lstrip(',')
-            file.write(datastr[i]+'\n')
-            print(datastr[i])
+        for data in datastr:
+            data=data.replace('\n', ',')
+            data=data.rstrip(',')
+            data=data.lstrip(',')
+            file.write(data+'\n')
+            print(data)
             
 for j in range (1, 227):
     getdata('http://www.cvk.gov.ua/pls/vp2014/wp336?pt001f01=702&pt005f01='+str(j)) ##getting data for all the 226 disrticts
